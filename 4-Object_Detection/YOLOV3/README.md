@@ -37,7 +37,7 @@ $ python image_demo.py
 Download [yymnist](https://github.com/YunYang1994/yymnist) dataset and make data.
 
 ```
-$ git clone https://github.com/YunYang1994/yymnist.git
+$ git submodule update --init --recursive --remote yymnist # Use `--remote` to update the submodule to the latest commit.
 $ python yymnist/make_data.py --images_num 1000 --images_path ./data/dataset/train --labels_txt ./data/dataset/yymnist_train.txt
 $ python yymnist/make_data.py --images_num 200  --images_path ./data/dataset/test  --labels_txt ./data/dataset/yymnist_test.txt
 ```
