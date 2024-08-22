@@ -60,10 +60,12 @@ def train_step(image_data, target):
 
         gradients = tape.gradient(total_loss, model.trainable_variables)
         optimizer.apply_gradients(zip(gradients, model.trainable_variables))
-        tf.print("=> STEP %4d   lr: %.6f   giou_loss: %4.2f   conf_loss: %4.2f   "
-                 "prob_loss: %4.2f   total_loss: %4.2f" %(global_steps, optimizer.lr.numpy(),
-                                                          giou_loss, conf_loss,
-                                                          prob_loss, total_loss))
+        tf.print("=> STEP " + tf.strings.as_string(global_steps) +
+                 "\tlr: " + tf.strings.as_string(optimizer.lr, 6) +
+                 "\tgiou_loss: " + tf.strings.as_string(giou_loss, 2) +
+                 "\tconf_loss: " + tf.strings.as_string(conf_loss, 2) +
+                 "\tprob_loss: " + tf.strings.as_string(prob_loss, 2) +
+                 "\ttotal_loss: " + tf.strings.as_string(total_loss, 2))
         # update learning rate
         global_steps.assign_add(1)
         if global_steps < warmup_steps:
@@ -72,7 +74,7 @@ def train_step(image_data, target):
             lr = cfg.TRAIN.LR_END + 0.5 * (cfg.TRAIN.LR_INIT - cfg.TRAIN.LR_END) * (
                 (1 + tf.cos((global_steps - warmup_steps) / (total_steps - warmup_steps) * np.pi))
             )
-        optimizer.lr.assign(lr.numpy())
+        optimizer.lr.assign(tf.cast(lr, tf.float32))
 
         # writing summary data
         with writer.as_default():
