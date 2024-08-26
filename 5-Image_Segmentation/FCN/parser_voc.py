@@ -15,7 +15,7 @@ import os
 import argparse
 import numpy as np
 from utils import colormap
-from scipy import misc
+import imageio
 
 if not os.path.exists("./data"): os.mkdir("./data")
 if not os.path.exists("./data/train_labels"): os.mkdir("./data/train_labels")
@@ -42,7 +42,7 @@ for mode in ["train", "test"]:
             if not os.path.exists(image_path): continue
             image_write.writelines(image_path+"\n")
             label_path = os.path.join(train_label_folder, train_label_image)
-            label_image = np.array(misc.imread(label_path))
+            label_image = np.array(imageio.imread(label_path))
             write_label = open(("./data/%s_labels/" % mode)+label_name+".txt", 'w')
             print("=> processing %s" %label_path)
             H, W, C = label_image.shape
