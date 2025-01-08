@@ -2,6 +2,20 @@
 --------------------
 A minimal tensorflow implementation of YOLOv3, with support for training, inference and evaluation.
 
+# Requirement
+--------------------
+Python 版本相容性注意事項：
+1. 本專案的 TensorFlow 2.0.0 與較新版本的 Python 可能會發生相容性問題。如果在執行 "pip3 install -r ./docs/requirements.txt" 遇到以下錯誤:
+    ERROR: Could not find a version that satisfies the requirement tensorflow==2.0.0
+    ERROR: No matching distribution found for tensorflow==2.0.0
+
+這通常代表您的 Python 版本過新。建議使用:
+- Python 3.6-3.7 版本
+- TensorFlow 2.0.0
+
+如需使用較新版本的 Python，請考慮更新到較新版本的 TensorFlow。
+
+
 ## Installation
 --------------------
 Install requirements and download pretrained weights
@@ -76,4 +90,3 @@ $ tensorboard --logdir ./data/log
   year         = 2019,
 }
 ```
-
